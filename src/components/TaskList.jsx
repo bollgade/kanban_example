@@ -8,16 +8,26 @@ export const TaskList = (props) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== removeId));
   };
 
-  const changeTaskStatus = (task) => {
+  const changeTaskStatus = (task, status) => {
     setTasks((prevTasks) =>
       prevTasks.map((oldTask) => {
         if (oldTask.id === task.id) {
-          const newStatus = statusMap[stage];
+          const newStatus = status || statusMap[stage];
           oldTask.status = newStatus;
         }
         return oldTask;
       })
     );
+  };
+
+  const onDrop = (e) => {
+    e.preventDefault();
+    const taskId = e.dataTransfer.getData("taskId");
+    changeTaskStatus({ id: +taskId }, stage);
+  };
+
+  const onDragOver = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -28,6 +38,8 @@ export const TaskList = (props) => {
         padding: "5px",
         width: "180px",
       }}
+      onDrop={onDrop}
+      onDragOver={onDragOver}
     >
       <h3>{stage}</h3>
       {tasks
