@@ -1,8 +1,8 @@
 export const Button = (props) => {
-  const { className, children, onClick } = props;
+  const { className, children, ...otherProps } = props;
 
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} {...otherProps}>
       {children}
     </button>
   );
