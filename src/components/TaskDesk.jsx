@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { TaskList } from "./TaskList";
 import { statusMap } from "../consts/taskConsts";
 import axios from "axios";
+import { Button } from "./UI/Button";
+import { TaskForm } from "./TaskForm";
 
 function getRightTaskFormat(task) {
   const newTask = {
@@ -40,6 +42,10 @@ export const TaskDesk = (props) => {
       className={className}
       style={{ display: "flex", flexDirection: "row", gap: "15px" }}
     >
+      <div>
+        <p>Add new task</p>
+        <TaskForm setTasks={setTasks} />
+      </div>
       {isLoading ? (
         <p>LOADING...</p>
       ) : (
