@@ -15,7 +15,9 @@ export const TaskItem = (props) => {
       <p>{task.title}</p>
       <p>{task.team}</p>
       <p>{task.dueDate}</p>
-      <Button onClick={() => onStageChange(task)}>NextStage</Button>
+      {task.status !== "Completed" && (
+        <Button onClick={() => onStageChange(task)}>NextStage</Button>
+      )}
       <Button onClick={() => onDelete(task.id)}>Delete</Button>
     </div>
   );
