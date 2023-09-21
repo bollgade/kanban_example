@@ -4,7 +4,9 @@ import { Input } from "./UI/Input";
 
 export const TaskForm = (props) => {
   const { className, onCancel, setTasks } = props;
-  const [taskFrom, setTaskForm] = useState({});
+  const [taskForm, setTaskForm] = useState({
+    title: "",
+  });
 
   function onTitleChange(title) {
     setTaskForm((prev) => ({ ...prev, title }));
@@ -13,7 +15,7 @@ export const TaskForm = (props) => {
   const OnSaveTask = () => {
     setTasks((prev) => [
       ...prev,
-      { ...taskFrom, id: new Date(), status: "ToDo" },
+      { ...taskForm, id: new Date(), status: "ToDo" },
     ]);
   };
 
@@ -26,7 +28,7 @@ export const TaskForm = (props) => {
       }}
     >
       <Input
-        value={taskFrom.title}
+        value={taskForm.title}
         onChange={(e) => onTitleChange(e.target.value)}
       />
       <Button onClick={OnSaveTask}>Save Task</Button>
