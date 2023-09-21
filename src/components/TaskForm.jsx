@@ -3,6 +3,7 @@ import { Button } from "./UI/Button";
 import { Input } from "./UI/Input";
 
 export const TaskForm = (props) => {
+  console.log("RENDERING - ", "TaskForm", "\n================================");
   const { className, onCancel, setTasks } = props;
   const [taskForm, setTaskForm] = useState({
     title: "",

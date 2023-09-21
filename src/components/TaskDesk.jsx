@@ -1,41 +1,11 @@
-import { useEffect, useState } from "react";
-import { TaskList } from "./TaskList";
-import { statusMap } from "../consts/taskConsts";
-import axios from "axios";
-import { Button } from "./UI/Button";
 import { TaskForm } from "./TaskForm";
-
-function getRightTaskFormat(task) {
-  const newTask = {
-    id: task.id,
-    team: task.userId,
-    title: task.title,
-    status: task.completed ? "Completed" : "ToDo",
-  };
-  return newTask;
-}
+import { TaskAllLists } from "./TaskAllLists";
+import { useState } from "react";
 
 export const TaskDesk = (props) => {
+  console.log("RENDERING - ", "TaskDesk", "\n================================");
   const { className } = props;
-  const [tasks, setTasks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchTasks = async () => {
-    setIsLoading(true);
-    const { data } = await axios
-      .get("https://jsonplaceholder.typicode.com/todos?userId=2")
-      .then((res) => res)
-      .catch((e) => console.error(e))
-      .finally(() => setIsLoading(false));
-
-    const result = data.map(getRightTaskFormat);
-    setTasks(result);
-    return result;
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+  const [setTasksFn, setSetTasksFn] = useState(() => {});
 
   return (
     <div
@@ -44,22 +14,9 @@ export const TaskDesk = (props) => {
     >
       <div>
         <p>Add new task</p>
-        <TaskForm setTasks={setTasks} />
+        <TaskForm setTasks={setTasksFn} />
       </div>
-      {isLoading ? (
-        <p>LOADING...</p>
-      ) : (
-        <>
-          {Object.values(statusMap).map((status) => (
-            <TaskList
-              tasks={tasks}
-              setTasks={setTasks}
-              stage={status}
-              key={status}
-            />
-          ))}
-        </>
-      )}
+      <TaskAllLists setSetTaskFn={setSetTasksFn} />
     </div>
   );
 };

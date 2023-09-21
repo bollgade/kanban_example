@@ -2,6 +2,11 @@ import { statusMap } from "../consts/taskConsts";
 import { TaskItem } from "./TaskItem";
 
 export const TaskList = (props) => {
+  console.log(
+    "RENDERING - ",
+    "TaskList ",
+    "\n================================"
+  );
   const { tasks, setTasks, stage, className } = props;
 
   const deleteTask = (removeId) => {

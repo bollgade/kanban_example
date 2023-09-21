@@ -1,6 +1,7 @@
 import { Button } from "./UI/Button";
 
 export const TaskItem = (props) => {
+  // console.log("RENDERING - ", "TaskItem", "\n================================");
   const { className, task, onStageChange, onDelete } = props;
 
   const onDragStart = (e) => {
